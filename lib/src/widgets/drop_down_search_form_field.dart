@@ -21,6 +21,9 @@ class DropDownSearchFormField<T> extends FormField<String> {
   // Adds a callback for resetting the form field
   final void Function()? onReset;
 
+  // Makes the suffixIcon dynamic
+  final Widget? suffixIcon;
+
   /// Creates a [DropDownSearchFormField]
   DropDownSearchFormField({
     super.key,
@@ -51,6 +54,7 @@ class DropDownSearchFormField<T> extends FormField<String> {
     PaginatedSuggestionsCallback<T>? paginatedSuggestionsCallback,
     double suggestionsBoxVerticalOffset = 5.0,
     this.textFieldConfiguration = const TextFieldConfiguration(),
+    this.suffixIcon,
     AnimationTransitionBuilder? transitionBuilder,
     Duration animationDuration = const Duration(milliseconds: 500),
     double animationStart = 0.25,
@@ -95,7 +99,7 @@ class DropDownSearchFormField<T> extends FormField<String> {
                 textFieldConfiguration: textFieldConfiguration.copyWith(
                   decoration: textFieldConfiguration.decoration.copyWith(
                       errorText: state.errorText,
-                      suffixIcon: const Icon(Icons.arrow_drop_down)),
+                      suffixIcon: suffixIcon ?? const Icon(Icons.arrow_drop_down),
                   onChanged: (text) {
                     state.didChange(text);
                     textFieldConfiguration.onChanged?.call(text);
